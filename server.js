@@ -62,7 +62,7 @@ app.put('/bookshelf/:id', function(req, res) {
 	var id = req.params.id;
 
 	db.books.findAndModify({query: {_id: mongojs.ObjectId(id)},
-		update: {$set: {title: req.body.title, email: req.body.author, year: req.body.year, isbn: req.body.isbn}},
+		update: {$set: {title: req.body.title, author: req.body.author, year: req.body.year, isbn: req.body.isbn}},
 		new: true}, function(err, doc) {
 			res.json(doc);
 		}
