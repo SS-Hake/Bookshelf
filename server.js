@@ -2,6 +2,10 @@ var port = 4000;
 //Grab express and set to app variable.
 var express = require('express');
 var app = express();
+var mongojs = require('mongojs');
+var db = mongojs('books', ['books']);
+//body parser so i can read req/res.body.
+var bodyParser = require('body-parser');
 
 //SEt route to index page.
 /*app.get('/', function(req, res) {
@@ -10,33 +14,23 @@ var app = express();
 
 //Get static resources in public folder.
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
 
 app.get('/bookshelf', function(req, res) {
 	console.log("[+] Bookshelf get request...");
 
-	 var book1 = {
-		title: 'Clean Code',
-		author: 'Robert C. Martin',
-		year: '2008',
-		isbn: '978-0132350884'
-	};
+	db.books.find(function(err, docs) {
+		console.log(docs);
+		res.json(docs);
+	});
+});
 
-	var book2 = {
-		title: 'The Pragmatic Programmer',
-		author: 'Andrew Hunt',
-		year: '1999',
-		isbn: '978-0201616224'
-	};
+app.post('/bookshelf', function(req, res) {
+	console.log(req.body);
 
-	 var book3 = {
-		title: 'The C++ Programming Language',
-		author: 'Bjarne Stroustrup',
-		year: '2013',
-		isbn: '978-0321563842'
-	};
-
-	var books = [book1, book2, book3];
-	res.json(books);
+	db.books.insert(req.body, function(err, doc) {
+		res.json(doc);
+	});
 });
 
 app.listen(port);

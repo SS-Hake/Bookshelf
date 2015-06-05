@@ -18,7 +18,8 @@
 		<div class="search" style="margin-top:30px;">
 		<label for="searchTextInput">Search</label>
 		<input type="text" 
-		placeholder="Enter query text"
+		ng-model="search"
+		placeholder="Search"
 		id="searchTextInput"
 		class="form-control"></input>
 		</div>
@@ -31,10 +32,18 @@
 					<th>Author</th>
 					<th>Year</th>
 					<th>ISBN</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="book in books">
+				<tr>
+					<td><input class="form-control" ng-model="book.title"></td>
+					<td><input class="form-control" ng-model="book.author"></td>
+					<td><input class="form-control" ng-model="book.year"></td>
+					<td><input class="form-control" ng-model="book.isbn"></td>
+					<td><button class="btn btn-secondary" ng-click="addBook()">Add</button></td>
+				</tr>
+				<tr ng-repeat="book in books | filter: search | orderBy: 'year'">
 					<td>{{book.title}}</td>
 					<td>{{book.author}}</td>
 					<td>{{book.year}}</td>
