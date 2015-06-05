@@ -48,6 +48,8 @@
 					<td>{{book.author}}</td>
 					<td>{{book.year}}</td>
 					<td>{{book.isbn}}</td>
+					<td><button class="btn btn-danger btn-block" ng-click="deleteBook(book._id)">Delete</button>
+					<button class="btn btn-danger btn-block" ng-click="editBook(book._id)">Edit</button></td>
 				</tr>
 			</tbody>
 		</table>

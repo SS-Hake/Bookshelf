@@ -13,7 +13,7 @@ var app = angular.module("Bookshelf", [])
 	};
 
 	refreshList();
-	
+
 	$scope.addBook = function() {
 		console.log("[+] Book would have been added...");
 		//console.log($scope.book);
@@ -22,5 +22,16 @@ var app = angular.module("Bookshelf", [])
 			console.log(response);
 			refreshList();
 		});
+	};
+
+	$scope.deleteBook = function(id) {
+		console.log(id);
+
+		$http.delete('/bookshelf/' + id).success(function(response) {
+			console.log(response);
+			refreshList();
+		});
+
+
 	};
 }]);
