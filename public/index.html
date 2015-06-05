@@ -45,6 +45,7 @@
 					<button class="btn btn-secondary btn-block" ng-click="updateBook()">Update</button>
 					<button class="btn btn-secondary btn-block" ng-click="clearFields()">Clear</button></td>
 				</tr>
+				<!--Displays all the data in $scope.book - search allowed and ordered by year. -->
 				<tr ng-repeat="book in books | filter: search | orderBy: 'year'">
 					<td>{{book.title}}</td>
 					<td>{{book.author}}</td>

@@ -5,19 +5,19 @@ var app = angular.module("Bookshelf", [])
 	$scope.test = "hello!";
 
 	var refreshList = function() {
+		//Used to refresh the $scope.books - updates with whatever changes
+		//have been made, and displays all books on initial load.
 		$http.get('/bookshelf').success(function(response) {
 			console.log("[+] Data received...");
 			$scope.books = response;
 			$scope.book = null;
 		});
 	};
-
+	//Initial load.
 	refreshList();
 
 	$scope.addBook = function() {
-		//console.log("[+] Book would have been added...");
-		//console.log($scope.book);
-
+		//Sends the current book attributes to the post route.
 		$http.post('/bookshelf', $scope.book).success(function(response) {
 			console.log(response);
 			console.log("[+] Adding book to database...");
@@ -26,8 +26,7 @@ var app = angular.module("Bookshelf", [])
 	};
 
 	$scope.deleteBook = function(id) {
-		//console.log(id);
-
+		//Send the id of the clicked book to the delete route.
 		$http.delete('/bookshelf/' + id).success(function(response) {
 			//console.log(response);
 			console.log("[+] Deleting book data...");
@@ -36,8 +35,8 @@ var app = angular.module("Bookshelf", [])
 	};
 
 	$scope.editBook = function(id) {
-		console.log(id);
-
+		//Gets the clicked books entry in the database for editing.
+		//Sends the current books id to the get route.
 		$http.get('/bookshelf/' + id).success(function(response) {
 			//Put the respective properties into the edit boxes.
 			$scope.book = response;
@@ -46,7 +45,7 @@ var app = angular.module("Bookshelf", [])
 	};
 
 	$scope.updateBook = function() {
-		//console.log($scope.book._id);
+		//Sends the current books id with new book attributes to be updated.
 		$http.put('/bookshelf/' + $scope.book._id, $scope.book).success(function(response) {
 			console.log("[+] Updated book data...");
 			refreshList();
@@ -54,6 +53,7 @@ var app = angular.module("Bookshelf", [])
 	};
 
 	$scope.clearFields = function() {
+		//Sets the current book attributes to null, clears all the text boxes.
 		console.log("[+] Clearing text fields...");
 		$scope.book = null;
 	};
