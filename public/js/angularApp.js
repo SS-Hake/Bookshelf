@@ -31,7 +31,17 @@ var app = angular.module("Bookshelf", [])
 			console.log(response);
 			refreshList();
 		});
-
-
 	};
+
+	$scope.editBook = function(id) {
+		console.log(id);
+
+		$http.get('/bookshelf/' + id).success(function(response) {
+			//Put the respective properties into the edit boxes.
+			$scope.book = response;
+			console.log("this is happening");
+			console.log(response);
+		});
+	};
+
 }]);

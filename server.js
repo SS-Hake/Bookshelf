@@ -44,5 +44,13 @@ app.delete('/bookshelf/:id', function(req, res) {
 	});
 });
 
+app.get('/bookshelf/:id', function(req, res) {
+	var id = req.params.id;
+	console.log(id);
+	db.books.findOne({_id: mongojs.ObjectId(id)}, function(err, doc) {
+		res.json(doc);
+	});
+});
+
 app.listen(port);
 console.log("Server listening on port " + port);
