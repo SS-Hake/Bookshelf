@@ -1,4 +1,4 @@
-var port = 4000;
+var port = Number(process.env.PORT || 4000);
 //Grab express and set to app variable.
 var express = require('express');
 var app = express();
