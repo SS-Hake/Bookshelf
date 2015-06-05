@@ -52,5 +52,16 @@ app.get('/bookshelf/:id', function(req, res) {
 	});
 });
 
+app.put('/bookshelf/:id', function(req, res) {
+	var id = req.params.id;
+
+	db.books.findAndModify({query: {_id: mongojs.ObjectId(id)},
+		update: {$set: {title: req.body.title, email: req.body.author, year: req.body.year, isbn: req.body.isbn}},
+		new: true}, function(err, doc) {
+			res.json(doc);
+		}
+	);
+});
+
 app.listen(port);
 console.log("Server listening on port " + port);

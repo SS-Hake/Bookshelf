@@ -15,20 +15,22 @@ var app = angular.module("Bookshelf", [])
 	refreshList();
 
 	$scope.addBook = function() {
-		console.log("[+] Book would have been added...");
+		//console.log("[+] Book would have been added...");
 		//console.log($scope.book);
 
 		$http.post('/bookshelf', $scope.book).success(function(response) {
 			console.log(response);
+			console.log("[+] Adding book to database...");
 			refreshList();
 		});
 	};
 
 	$scope.deleteBook = function(id) {
-		console.log(id);
+		//console.log(id);
 
 		$http.delete('/bookshelf/' + id).success(function(response) {
-			console.log(response);
+			//console.log(response);
+			console.log("[+] Deleting book data...");
 			refreshList();
 		});
 	};
@@ -39,9 +41,20 @@ var app = angular.module("Bookshelf", [])
 		$http.get('/bookshelf/' + id).success(function(response) {
 			//Put the respective properties into the edit boxes.
 			$scope.book = response;
-			console.log("this is happening");
-			console.log(response);
+			console.log("[+] Loading book data to edit...");
 		});
 	};
 
+	$scope.updateBook = function() {
+		//console.log($scope.book._id);
+		$http.put('/bookshelf/' + $scope.book._id, $scope.book).success(function(response) {
+			console.log("[+] Updated book data...");
+			refreshList();
+		});
+	};
+
+	$scope.clearFields = function() {
+		console.log("[+] Clearing text fields...");
+		$scope.book = null;
+	};
 }]);
