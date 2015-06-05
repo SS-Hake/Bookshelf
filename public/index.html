@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- A bookshelf web app which keeps a permanent record of books I wish to read and allows for suggestions to
+	be added by anyone!  Built using MEAN stack and hosted on heroku.
+	Code available at: https://github.com/SS-Hake/Bookshelf -->
+	<title>Sam's Bookshelf</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+	<script src="js/angularApp.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+</head>
+<body ng-app="Bookshelf">
+	
+	<div class="container" ng-controller="bookshelfController">
+		<h1>Sam's bookshelf</h1>
+
+		<div class="search" style="margin-top:30px;">
+		<label for="searchTextInput">Search</label>
+		<input type="text" 
+		placeholder="Enter query text"
+		id="searchTextInput"
+		class="form-control"></input>
+		</div>
+
+		<!--Table displays book data. -->
+		<table class="table table-responsive" style="margin-top:30px;">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Year</th>
+					<th>ISBN</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="book in books">
+					<td>{{book.title}}</td>
+					<td>{{book.author}}</td>
+					<td>{{book.year}}</td>
+					<td>{{book.isbn}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
